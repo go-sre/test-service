@@ -7,9 +7,8 @@ import (
 )
 
 const (
-	accessLogPattern              = "/access-log"
-	healthLivenessPattern         = "/health/liveness"
-	healthLivenessPostgresPattern = "/health/liveness/postgres"
+	processPattern        = "/process"
+	healthLivenessPattern = "/health/liveness"
 
 	IndexPattern   = "/debug/pprof/"
 	CmdLinePattern = "/debug/pprof/cmdline"
@@ -23,6 +22,7 @@ func initMux(r *http.ServeMux) {
 	addProfileRoutes(r)
 
 	r.Handle(healthLivenessPattern, http.HandlerFunc(handler.HealthLivenessHandler))
+	r.Handle(processPattern, http.HandlerFunc(handler.EndpointHandler))
 
 }
 
