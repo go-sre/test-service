@@ -3,14 +3,11 @@ package host
 import (
 	"github.com/go-sre/core/exchange"
 	"github.com/go-sre/core/runtime"
-	"github.com/go-sre/host/accessdata"
 	"github.com/go-sre/host/accesslog"
-	"github.com/go-sre/host/controller"
 	middleware2 "github.com/go-sre/host/middleware"
 	runtime2 "github.com/go-sre/host/runtime"
 	"github.com/go-sre/test-service/pkg/resource"
 	"net/http"
-	"time"
 )
 
 const (
@@ -30,7 +27,6 @@ func Startup[E runtime.ErrorHandler, O runtime.OutputHandler](mux *http.ServeMux
 }
 
 func Shutdown() {
-	//messaging.Shutdown()
 }
 
 func initLogging() error {
@@ -44,11 +40,11 @@ func initLogging() error {
 	// log.Write[log.DebugOutputHandler, data.JsonFormatter](entry)
 	//},
 	//)
-	controller.SetLogFn(func(traffic string, start time.Time, duration time.Duration, req *http.Request, resp *http.Response, statusFlags string, controllerState map[string]string) {
-		entry := accessdata.NewEntry(traffic, start, duration, req, resp, statusFlags, controllerState)
-		accesslog.Write[accesslog.DebugOutputHandler, accessdata.JsonFormatter](entry)
-	},
-	)
+	//controller.SetLogFn(func(traffic string, start time.Time, duration time.Duration, req *http.Request, resp *http.Response, statusFlags string, controllerState map[string]string) {
+	//	entry := accessdata.NewEntry(traffic, start, duration, req, resp, statusFlags, controllerState)
+	//	accesslog.Write[accesslog.DebugOutputHandler, accessdata.JsonFormatter](entry)
+	//},
+	//)
 
 	err := accesslog.CreateIngressOperators(func() ([]byte, error) {
 		return resource.ReadFile(runtime2.EnvExpansion(ingressLogOperatorNameFmt))
