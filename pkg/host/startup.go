@@ -5,14 +5,13 @@ import (
 	"github.com/go-sre/core/runtime"
 	"github.com/go-sre/host/accesslog"
 	middleware2 "github.com/go-sre/host/middleware"
-	runtime2 "github.com/go-sre/host/runtime"
 	"github.com/go-sre/test-service/pkg/resource"
 	"net/http"
 )
 
 const (
-	egressLogOperatorNameFmt  = "fs/egress_logging_operators_{env}.json"
-	ingressLogOperatorNameFmt = "fs/ingress_logging_operators_{env}.json"
+	egressLogOperatorNameFmt  = "fs/egress_logging_operators.json"
+	ingressLogOperatorNameFmt = "fs/ingress_logging_operators.json"
 )
 
 func Startup[E runtime.ErrorHandler, O runtime.OutputHandler](mux *http.ServeMux) (http.Handler, *runtime.Status) {
@@ -47,11 +46,11 @@ func initLogging() error {
 	//)
 
 	err := accesslog.CreateIngressOperators(func() ([]byte, error) {
-		return resource.ReadFile(runtime2.EnvExpansion(ingressLogOperatorNameFmt))
+		return resource.ReadFile(ingressLogOperatorNameFmt)
 	})
 	if err == nil {
 		err = accesslog.CreateEgressOperators(func() ([]byte, error) {
-			return resource.ReadFile(runtime2.EnvExpansion(egressLogOperatorNameFmt))
+			return resource.ReadFile(egressLogOperatorNameFmt)
 		})
 	}
 	return err
