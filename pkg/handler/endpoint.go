@@ -13,7 +13,7 @@ func init() {
 }
 
 func EndpointHandler(w http.ResponseWriter, r *http.Request) {
-	s := fmt.Sprintf("{ \"statusCode\": %v  }", statusCode)
+	s := fmt.Sprintf("{ \"statusCode-process\": %v  }", statusCode)
 	w.WriteHeader(statusCode)
 	w.Write([]byte(s))
 }

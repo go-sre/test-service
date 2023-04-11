@@ -8,6 +8,7 @@ import (
 
 const (
 	processPattern        = "/process"
+	processPattern2       = "/process2"
 	healthLivenessPattern = "/health/liveness"
 
 	IndexPattern   = "/debug/pprof/"
@@ -23,6 +24,7 @@ func initMux(r *http.ServeMux) {
 
 	r.Handle(healthLivenessPattern, http.HandlerFunc(handler.HealthLivenessHandler))
 	r.Handle(processPattern, http.HandlerFunc(handler.EndpointHandler))
+	r.Handle(processPattern2, http.HandlerFunc(handler.EndpointHandler2))
 
 }
 

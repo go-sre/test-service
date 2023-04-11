@@ -18,10 +18,10 @@ func Startup[E runtime.ErrorHandler, O runtime.OutputHandler](mux *http.ServeMux
 	var e E
 	err := initLogging()
 	if err != nil {
-		return nil, e.Handle("/host/startup/logging", err)
+		return nil, e.Handle(nil, "/host/startup/logging", err)
 	}
 	initMux(mux)
-	middleware2.AccessLogWrapTransport(exchange.Client())
+	middleware2.AccessLogWrapTransport(exchange.Client)
 	return middleware2.AccessHttpHostMetricsHandler(mux, ""), runtime.NewStatusOK()
 }
 
