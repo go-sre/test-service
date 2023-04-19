@@ -3,8 +3,8 @@ module github.com/go-sre/test-service
 go 1.18
 
 require (
-	github.com/go-sre/core v0.0.0-20230403183745-a454c738cec2
-	github.com/go-sre/host v0.0.0-20230411124719-aba3517c320f
+	github.com/go-sre/core v0.0.0-20230414125950-256e7ff082d1
+	github.com/go-sre/host v0.0.0-20230419115837-bb071994bed0
 )
 
 require (

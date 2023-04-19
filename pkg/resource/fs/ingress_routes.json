@@ -4,6 +4,7 @@
     "Pattern": null,
     "Traffic": "ingress",
     "RateLimiter": {
+      "Enabled": true,
       "Limit": 100,
       "Burst": 25,
       "StatusCode": 429
@@ -14,6 +15,40 @@
     "Pattern": null,
     "Traffic": "ingress",
     "Timeout": {
+      "Enabled": true,
+      "Duration": "5s",
+      "StatusCode": 504
+    }
+  },
+  {
+    "Name": "health-liveness",
+    "Pattern": "/health/liveness",
+    "Traffic": "ingress",
+    "Ping": true,
+    "Timeout": {
+      "Enabled": true,
+      "Duration": "5s",
+      "StatusCode": 504
+    }
+  },
+  {
+    "Name": "process",
+    "Pattern": "/process",
+    "Traffic": "ingress",
+    "Ping": true,
+    "Timeout": {
+      "Enabled": true,
+      "Duration": "5s",
+      "StatusCode": 504
+    }
+  },
+  {
+    "Name": "process2",
+    "Pattern": "/process2",
+    "Traffic": "ingress",
+    "Ping": true,
+    "Timeout": {
+      "Enabled": true,
       "Duration": "5s",
       "StatusCode": 504
     }
@@ -42,42 +77,5 @@
     "Name": "pprof-trace",
     "Pattern": "/debug/pprof/trace",
     "Traffic": "ingress"
-  },
-  {
-    "Name": "google-search-ingress",
-    "Pattern": "/google",
-    "Traffic": "ingress",
-    "Timeout": {
-      "Duration": "5s",
-      "StatusCode": 504
-    }
-  },
-  {
-    "Name": "twitter-home-ingress",
-    "Pattern": "/twitter",
-    "Traffic": "ingress",
-    "Timeout": {
-      "Duration": "5s",
-      "StatusCode": 504
-    }
-  },
-  {
-    "Name": "facebook-home-ingress",
-    "Pattern": "/facebook",
-    "Traffic": "ingress",
-    "Timeout": {
-      "Duration": "5s",
-      "StatusCode": 504
-    }
-  },
-  {
-    "Name": "health-liveness",
-    "Pattern": "/health/liveness",
-    "Traffic": "ingress",
-    "Ping": true,
-    "Timeout": {
-      "Duration": "5s",
-      "StatusCode": 504
-    }
   }
 ]
